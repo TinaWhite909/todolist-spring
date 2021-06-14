@@ -1,5 +1,6 @@
 package com.github.tinawhite909.todolistspring.service;
 
+import com.github.tinawhite909.todolistspring.bean.DBStatus;
 import com.github.tinawhite909.todolistspring.bean.DBTask;
 import com.github.tinawhite909.todolistspring.bean.NewTask;
 import com.github.tinawhite909.todolistspring.exception.TaskServiceRuntimeException;
@@ -28,6 +29,7 @@ public class TaskService implements ITaskService {
                     .setStartDate(dbTask.getStartDate())
                     .setFinishDate(dbTask.getFinishDate())
                     .setContent(dbTask.getContent())
+                    .setStatus(dbTask.getStatus().getStatus())
                     .build();
 
             newTasks.add(task);
@@ -38,7 +40,7 @@ public class TaskService implements ITaskService {
     @Override
     public NewTask addTask(NewTask newTask) {
 
-        if (newTask.getFinishDate()==null || LocalDate.now().isAfter(newTask.getFinishDate())) {
+        if (newTask.getFinishDate() == null || LocalDate.now().isAfter(newTask.getFinishDate())) {
             throw new TaskServiceRuntimeException("FinishDate is null or in the past!");
         }
         if (!StringUtils.hasText(newTask.getContent())) {
@@ -50,6 +52,7 @@ public class TaskService implements ITaskService {
                 .setStartDate(LocalDate.now())
                 .setFinishDate(newTask.getFinishDate())
                 .setContent(newTask.getContent())
+                .setStatus(new DBStatus(1L, ""))
                 .build();
 
         taskMapper.addTask(task);

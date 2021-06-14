@@ -7,23 +7,26 @@ public class NewTask {
     private LocalDate startDate;
     private LocalDate finishDate;
     private String content;
+    private String status;
 
     public NewTask(Builder builder) {
         this.id = builder.id;
         this.startDate = builder.startDate;
         this.finishDate = builder.finishDate;
         this.content = builder.content;
+        this.status = builder.status;
     }
 
     public NewTask() {
 
     }
 
-    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content) {
+    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content, String status) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.content = content;
+        this.status = status;
     }
 
     public Long getId() {
@@ -58,12 +61,20 @@ public class NewTask {
         this.content = content;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public static class Builder {
         Long id;
         LocalDate startDate;
         LocalDate finishDate;
         String content;
+        String status;
 
         public NewTask.Builder setId(Long val) {
             id = val;
@@ -82,6 +93,11 @@ public class NewTask {
 
         public NewTask.Builder setContent(String task) {
             content = task;
+            return this;
+        }
+
+        public NewTask.Builder setStatus(String stat) {
+            status = stat;
             return this;
         }
 
