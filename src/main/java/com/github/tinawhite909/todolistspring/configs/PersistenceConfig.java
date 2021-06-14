@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 
 @Configuration
 @Import(MyBatisJdbcConfiguration.class)
-@MapperScan("com.example.demo.mybatis")
+@MapperScan("com.github.tinawhite909.todolistspring.mybatis")
 public class PersistenceConfig {
 
     @Bean
