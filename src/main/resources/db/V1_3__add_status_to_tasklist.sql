@@ -1,0 +1,1 @@
+ALTER TABLE tasklist ADD status_id INT;
