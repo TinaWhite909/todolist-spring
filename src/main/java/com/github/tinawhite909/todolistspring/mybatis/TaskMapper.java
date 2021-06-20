@@ -18,11 +18,12 @@ public interface TaskMapper {
             "  t.\"TASK\" \"content\"\n" +
 
             "FROM public.tasklist t")
+
     List<DBTask> getTasks();
 
     @Insert("INSERT INTO public.tasklist(\n" +
-            "\"START_DATE\", \"FINISH_DATE\", \"TASK\")\n" +
-            "\tVALUES (#{startDate}, #{finishDate}, #{content});")
+            "\"START_DATE\", \"FINISH_DATE\", \"TASK\", \"STATUS_ID\")\n" +
+            "\tVALUES (#{startDate}, #{finishDate}, #{content}, #{status.id});")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "TASK_ID")
     Integer addTask(DBTask task);
 }

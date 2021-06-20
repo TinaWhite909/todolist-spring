@@ -9,9 +9,15 @@ import java.util.List;
 @Mapper
 public interface StatusMapper {
     @Select("SELECT \n" +
-            "  t.\"STATUS_ID\" id, \n" +
-            "  t.\"STATUS\" status, \n" +
-            "FROM public.tablestatuses ts")
+            "  t.\"ID\" id, \n" +
+            "  t.\"STATUS\" status \n" +
+            "FROM statuses t")
     List<DBStatus> getStatuses();
+
+    @Select("SELECT \n" +
+            "  t.\"ID\" id, \n" +
+            "  t.\"STATUS\" status \n" +
+            "FROM statuses t WHERE t.id = #{id}")
+    DBStatus getStatusById(Long id);
 
 }

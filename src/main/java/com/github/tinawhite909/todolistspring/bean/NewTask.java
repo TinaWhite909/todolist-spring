@@ -1,5 +1,7 @@
 package com.github.tinawhite909.todolistspring.bean;
 
+import javafx.util.Builder;
+
 import java.time.LocalDate;
 
 public class NewTask {
@@ -8,6 +10,7 @@ public class NewTask {
     private LocalDate finishDate;
     private String content;
     private String status;
+    private Long id_Status;
 
     public NewTask(Builder builder) {
         this.id = builder.id;
@@ -15,18 +18,20 @@ public class NewTask {
         this.finishDate = builder.finishDate;
         this.content = builder.content;
         this.status = builder.status;
+        this.id_Status = builder.id_Status;
     }
 
     public NewTask() {
 
     }
 
-    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content, String status) {
+    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content, String status, Long id_Status) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.content = content;
         this.status = status;
+        this.id_Status = id_Status;
     }
 
     public Long getId() {
@@ -75,6 +80,7 @@ public class NewTask {
         LocalDate finishDate;
         String content;
         String status;
+        Long id_Status;
 
         public NewTask.Builder setId(Long val) {
             id = val;
@@ -100,9 +106,14 @@ public class NewTask {
             status = stat;
             return this;
         }
+        public Builder setStatus(Long idStatus) {
+            id_Status = idStatus;
+            return this;
+        }
 
         public NewTask build() {
             return new NewTask(this);
         }
+
     }
 }

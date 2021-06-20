@@ -4,6 +4,7 @@ import com.github.tinawhite909.todolistspring.bean.DBStatus;
 import com.github.tinawhite909.todolistspring.bean.DBTask;
 import com.github.tinawhite909.todolistspring.bean.NewTask;
 import com.github.tinawhite909.todolistspring.exception.TaskServiceRuntimeException;
+import com.github.tinawhite909.todolistspring.mybatis.StatusMapper;
 import com.github.tinawhite909.todolistspring.mybatis.TaskMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class TaskService implements ITaskService {
     @Autowired
     private TaskMapper taskMapper;
 
+    @Autowired
+    private StatusMapper statusMapper;
+
     @Override
     public List<NewTask> getTasks() {
         List<NewTask> newTasks = new ArrayList<>();
@@ -29,7 +33,7 @@ public class TaskService implements ITaskService {
                     .setStartDate(dbTask.getStartDate())
                     .setFinishDate(dbTask.getFinishDate())
                     .setContent(dbTask.getContent())
-                    //.setStatus(dbTask.getStatus().getStatus())
+//                    .setStatus(dbTask.getStatus().getIdStatus())
                     .build();
 
             newTasks.add(task);
@@ -58,6 +62,7 @@ public class TaskService implements ITaskService {
         taskMapper.addTask(task);
 
         newTask.setId(task.getId());
+        newTask.setStatus(statusMapper.getStatusById(task.getStatus().getId()).getStatus());
 
         return newTask;
     }

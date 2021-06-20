@@ -28,4 +28,12 @@ public class DBStatus {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public  Long getIdStatus(){
+        return id;
+    }
+
+    public void setIdStatus(Long status) {
+        this.id = id;
+    }
 }
