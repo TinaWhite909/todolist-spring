@@ -29,7 +29,7 @@ public class TaskService implements ITaskService {
                     .setStartDate(dbTask.getStartDate())
                     .setFinishDate(dbTask.getFinishDate())
                     .setContent(dbTask.getContent())
-                    .setStatus(dbTask.getStatus().getStatus())
+                    //.setStatus(dbTask.getStatus().getStatus())
                     .build();
 
             newTasks.add(task);

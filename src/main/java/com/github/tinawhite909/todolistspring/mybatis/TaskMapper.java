@@ -16,6 +16,7 @@ public interface TaskMapper {
             "  t.\"START_DATE\" startDate, \n" +
             "  t.\"FINISH_DATE\" finishDate, \n" +
             "  t.\"TASK\" \"content\"\n" +
+
             "FROM public.tasklist t")
     List<DBTask> getTasks();
 
