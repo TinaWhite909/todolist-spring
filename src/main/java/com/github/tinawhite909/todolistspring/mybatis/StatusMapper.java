@@ -14,10 +14,10 @@ public interface StatusMapper {
             "FROM statuses t")
     List<DBStatus> getStatuses();
 
-    @Select("SELECT \n" +
-            "  t.\"ID\" id, \n" +
-            "  t.\"STATUS\" status \n" +
-            "FROM statuses t WHERE t.id = #{id}")
-    DBStatus getStatusById(Long id);
+//    @Select("SELECT \n" +
+//            "  t.\"ID\" id, \n" +
+//            "  t.\"STATUS\" status \n" +
+//            "FROM statuses t WHERE t.id = #{id}")
+//    DBStatus getStatusById(Long id);
 
 }

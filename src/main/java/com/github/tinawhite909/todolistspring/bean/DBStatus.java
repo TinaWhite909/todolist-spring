@@ -4,7 +4,7 @@ public class DBStatus {
     private Long id;
     private String status;
 
-    public DBStatus(){
+    public DBStatus() {
 
     }
 
@@ -29,7 +29,7 @@ public class DBStatus {
         this.status = status;
     }
 
-    public  Long getIdStatus(){
+    public Long getIdStatus() {
         return id;
     }
 

@@ -36,6 +36,13 @@ public class TaskService implements ITaskService {
 //                    .setStatus(dbTask.getStatus().getIdStatus())
                     .build();
 
+            if (dbTask.getStatus() == null) {
+                task.setStatus("");
+            } else {
+                task.setStatus(dbTask.getStatus().getStatus());
+            }
+
+
             newTasks.add(task);
         }
         return newTasks;
@@ -62,7 +69,7 @@ public class TaskService implements ITaskService {
         taskMapper.addTask(task);
 
         newTask.setId(task.getId());
-        newTask.setStatus(statusMapper.getStatusById(task.getStatus().getId()).getStatus());
+        newTask.setStatus(taskMapper.getStatusById(task.getStatus().getId()).getStatus());
 
         return newTask;
     }
