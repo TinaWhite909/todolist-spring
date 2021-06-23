@@ -7,23 +7,29 @@ public class NewTask {
     private LocalDate startDate;
     private LocalDate finishDate;
     private String content;
+    private String status;
+    private Long id_Status;
 
     public NewTask(Builder builder) {
         this.id = builder.id;
         this.startDate = builder.startDate;
         this.finishDate = builder.finishDate;
         this.content = builder.content;
+        this.status = builder.status;
+        this.id_Status = builder.id_Status;
     }
 
     public NewTask() {
 
     }
 
-    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content) {
+    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content, String status, Long id_Status) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.content = content;
+        this.status = status;
+        this.id_Status = id_Status;
     }
 
     public Long getId() {
@@ -58,12 +64,29 @@ public class NewTask {
         this.content = content;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Long getIdStatus() {
+        return id_Status;
+    }
+
+    public void setIdStatus(Long id_Status) {
+        this.id_Status = id_Status;
+    }
 
     public static class Builder {
         Long id;
         LocalDate startDate;
         LocalDate finishDate;
         String content;
+        String status;
+        Long id_Status;
 
         public NewTask.Builder setId(Long val) {
             id = val;
@@ -85,8 +108,19 @@ public class NewTask {
             return this;
         }
 
+        public NewTask.Builder setStatus(String stat) {
+            status = stat;
+            return this;
+        }
+
+        public NewTask.Builder setIdStatus(Long idStatus) {
+            id_Status = idStatus;
+            return this;
+        }
+
         public NewTask build() {
             return new NewTask(this);
         }
+
     }
 }

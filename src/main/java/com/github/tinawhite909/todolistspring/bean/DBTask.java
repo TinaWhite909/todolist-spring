@@ -7,22 +7,25 @@ public class DBTask {
     private LocalDate startDate;
     private LocalDate finishDate;
     private String content;
+    private DBStatus status;
 
     public DBTask(Builder builder) {
         this.id = builder.id;
         this.startDate = builder.startDate;
         this.finishDate = builder.finishDate;
         this.content = builder.content;
+        this.status = builder.status;
     }
 
     public DBTask() {
     }
 
-    public DBTask(Long id, LocalDate startDate, LocalDate finishDate, String content) {
+    public DBTask(Long id, LocalDate startDate, LocalDate finishDate, String content, DBStatus status) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.content = content;
+        this.status = status;
     }
 
     public Long getId() {
@@ -57,26 +60,43 @@ public class DBTask {
         this.content = content;
     }
 
+    public DBStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(DBStatus status) {
+        this.status = status;
+    }
+
     public static class Builder {
-         Long id;
-         LocalDate startDate;
-         LocalDate finishDate;
-         String content;
+        Long id;
+        LocalDate startDate;
+        LocalDate finishDate;
+        String content;
+        DBStatus status;
 
         public Builder setId(Long val) {
             id = val;
             return this;
         }
-        public Builder setStartDate(LocalDate date){
+
+        public Builder setStartDate(LocalDate date) {
             startDate = date;
             return this;
         }
-        public Builder setFinishDate(LocalDate date){
+
+        public Builder setFinishDate(LocalDate date) {
             finishDate = date;
             return this;
         }
-        public Builder setContent(String task){
-            content=task;
+
+        public Builder setContent(String task) {
+            content = task;
+            return this;
+        }
+
+        public Builder setStatus(DBStatus stat) {
+            status = stat;
             return this;
         }
 

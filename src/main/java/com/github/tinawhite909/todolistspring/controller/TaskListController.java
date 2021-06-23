@@ -7,7 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 public class TaskListController {
@@ -33,5 +35,17 @@ public class TaskListController {
         return "task";
     }
 
+    @GetMapping("/editstatus/{taskId}")
+    public String editStatus(@PathVariable Long taskId, Model model) {
+        model.addAttribute("task", taskService.getTask(taskId));
+        model.addAttribute("statuses", taskService.getStatuses());
+        return "editstatus";
+    }
+
+    @PostMapping("/editstatus/{taskId}")
+    public String updateStatus(@PathVariable Long taskId, @ModelAttribute("status_id") Long statusId, Model model) {
+        taskService.updateStatus(taskId, statusId);
+        return "redirect:/editstatus/" + taskId;
+    }
 
 }
