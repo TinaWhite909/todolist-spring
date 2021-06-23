@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Edit status</h1>
+<p th:text="'id: ' + ${task.id}" />
+<p th:text="'Start date: ' + ${task.startDate}" />
+<p th:text="'Finish date: ' + ${task.finishDate}" />
+<p th:text="'content: ' + ${task.content}" />
+<p th:text="'status: ' + ${task.status}" />
+<form action="#" th:action="@{'/editstatus/' + ${task.id}}" th:method="POST" name="status_id">
+<select name="status_id" id="status_id">
+    <span th:each="status:${statuses}" th:remove="tag">
+          <option th:value="${status.id}" th:text="${status.status}"></option>
+    </span>
+</select>
+<p><input type="submit" value="Submit" /></form>
+
+<a th:href="@{/tasklist}">
+    <p><input type="button" value="Tasklist"/></p>
+</a>
+
+</body>
+</html>

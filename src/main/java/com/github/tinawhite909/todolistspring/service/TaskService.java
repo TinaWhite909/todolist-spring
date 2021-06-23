@@ -33,7 +33,6 @@ public class TaskService implements ITaskService {
                     .setStartDate(dbTask.getStartDate())
                     .setFinishDate(dbTask.getFinishDate())
                     .setContent(dbTask.getContent())
-//                    .setStatus(dbTask.getStatus().getIdStatus())
                     .build();
 
             if (dbTask.getStatus() == null) {
@@ -73,4 +72,33 @@ public class TaskService implements ITaskService {
 
         return newTask;
     }
+
+    @Override
+    public NewTask getTask(Long taskId) {
+        DBTask dbTask = taskMapper.getTaskById(taskId);
+        NewTask task = new NewTask.Builder()
+                .setId(dbTask.getId())
+                .setStartDate(dbTask.getStartDate())
+                .setFinishDate(dbTask.getFinishDate())
+                .setContent(dbTask.getContent())
+                .build();
+
+        if (dbTask.getStatus() == null) {
+            task.setStatus("");
+        } else {
+            task.setStatus(dbTask.getStatus().getStatus());
+        }
+        return task;
+    }
+
+    @Override
+    public List<DBStatus> getStatuses() {
+        return statusMapper.getStatuses();
+    }
+
+    @Override
+    public void updateStatus(Long taskId, Long statusId) {
+        taskMapper.updateStatus(taskId, statusId);
+    }
+
 }

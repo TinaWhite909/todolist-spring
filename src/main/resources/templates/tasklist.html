@@ -31,7 +31,9 @@
         <td th:text="${task.content}"></td>
         <td th:text="${task.status}"></td>
         <td>
-            <button class="button" value=" "</button>
+            <a th:href="@{'/editstatus/' + ${task.id}}" method="post">
+                <button type="submit" >Изменить</button>
+            </a>
         </td>
     </tr>
     </tbody>
