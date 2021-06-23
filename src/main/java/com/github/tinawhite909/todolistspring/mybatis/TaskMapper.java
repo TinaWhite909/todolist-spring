@@ -3,8 +3,6 @@ package com.github.tinawhite909.todolistspring.mybatis;
 import com.github.tinawhite909.todolistspring.bean.DBStatus;
 import com.github.tinawhite909.todolistspring.bean.DBTask;
 import org.apache.ibatis.annotations.*;
-import org.springframework.data.jdbc.repository.query.Modifying;
-import org.springframework.data.jdbc.repository.query.Query;
 
 import java.util.List;
 

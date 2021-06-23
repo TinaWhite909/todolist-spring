@@ -6,10 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class ToDoListApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ToDoListApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ToDoListApplication.class, args);
+    }
 }

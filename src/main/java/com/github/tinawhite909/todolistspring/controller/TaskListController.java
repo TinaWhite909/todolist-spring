@@ -44,8 +44,6 @@ public class TaskListController {
 
     @PostMapping("/editstatus/{taskId}")
     public String updateStatus(@PathVariable Long taskId, @ModelAttribute("status_id") Long statusId, Model model) {
-//        model.addAttribute("task", taskService.getTask(taskId));
-//        model.addAttribute("statuses", taskService.getStatuses());
         taskService.updateStatus(taskId, statusId);
         return "redirect:/editstatus/" + taskId;
     }

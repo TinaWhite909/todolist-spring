@@ -30,6 +30,7 @@ public class PersistenceConfig {
         ds.setPassword(dbProperties.getPassword());
         return ds;
     }
+
     @Bean
     public SqlSessionFactoryBean sqlSessionFactory() {
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();

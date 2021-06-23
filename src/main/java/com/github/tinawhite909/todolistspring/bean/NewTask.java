@@ -1,8 +1,5 @@
 package com.github.tinawhite909.todolistspring.bean;
 
-import javafx.util.Builder;
-import org.apache.ibatis.javassist.expr.NewArray;
-
 import java.time.LocalDate;
 
 public class NewTask {
@@ -115,6 +112,7 @@ public class NewTask {
             status = stat;
             return this;
         }
+
         public NewTask.Builder setIdStatus(Long idStatus) {
             id_Status = idStatus;
             return this;
