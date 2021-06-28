@@ -1,5 +1,6 @@
-package com.github.tinawhite909.todolistspring.users.bean;
+package com.github.tinawhite909.todolistspring.users.bean.mybatis;
 
+import com.github.tinawhite909.todolistspring.users.bean.bean.DBUser;
 import org.apache.ibatis.annotations.*;
 
 @Mapper

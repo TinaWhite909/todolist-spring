@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>New User</h1>
-<form action="#" method="post" th:action="@{/newuser}" th:object="${user}">
+<form action="#" method="post" th:action="@{/newuser}" th:object="${newuser}">
     <p>Login: <input th:field="*{login}" type="text"></p>
     <p>Password: <input th:field="*{password}" type="text"/></p>
     <p>

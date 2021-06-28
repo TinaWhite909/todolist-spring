@@ -1,5 +1,7 @@
-package com.github.tinawhite909.todolistspring.users.bean;
+package com.github.tinawhite909.todolistspring.users.bean.controller;
 
+import com.github.tinawhite909.todolistspring.users.bean.bean.DBUser;
+import com.github.tinawhite909.todolistspring.users.bean.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +15,7 @@ public class UserController {
 
     @GetMapping("/newuser")
     public String newUserForm(Model model){
-        model.addAttribute("newuser",new User());
+        model.addAttribute("newuser",new DBUser.User());
         return "newuser";
     }
 
