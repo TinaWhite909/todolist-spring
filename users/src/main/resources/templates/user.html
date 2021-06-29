@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+<h1>User</h1>
+<p th:text="'id: ' + ${user.id}"/>
+<p th:text="'login: ' + ${user.login}"/>
+<p th:text="'password: ' + ${user.password}"/>
+<a href="/newtask">Submit another task</a>
+<a th:href="@{/changepassword}">
+    <p><input type="button" value="Changepassword"/></p>
+</a>
+</body>
+</html>
