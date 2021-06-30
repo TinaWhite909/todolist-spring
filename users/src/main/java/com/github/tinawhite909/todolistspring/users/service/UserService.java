@@ -1,8 +1,8 @@
-package com.github.tinawhite909.todolistspring.users.bean.service;
+package com.github.tinawhite909.todolistspring.users.service;
 
-import com.github.tinawhite909.todolistspring.users.bean.bean.User;
-import com.github.tinawhite909.todolistspring.users.bean.mybatis.UserMapper;
-import com.github.tinawhite909.todolistspring.users.bean.bean.DBUser;
+import com.github.tinawhite909.todolistspring.users.bean.DBUser;
+import com.github.tinawhite909.todolistspring.users.bean.NewUser;
+import com.github.tinawhite909.todolistspring.users.mybatis.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ public class UserService implements IUserService {
 
 
     @Override
-    public User addUser(User user) {
+    public NewUser addUser(NewUser user) {
         DBUser dbUser = new DBUser.Builder()
                 .setId(user.getId())
                 .setLogin(user.getLogin())
@@ -25,9 +25,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserById(Long userId){
+    public NewUser getUserById(Long userId){
         DBUser dbUser = userMapper.getUserById(userId);
-        User user = new User.Builder()
+        NewUser user = new NewUser.Builder()
                 .setId(dbUser.getId())
                 .setLogin(dbUser.getLogin())
                 .setPassword(dbUser.getLogin())

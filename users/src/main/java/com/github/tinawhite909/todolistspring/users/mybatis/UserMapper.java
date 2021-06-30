@@ -1,14 +1,14 @@
-package com.github.tinawhite909.todolistspring.users.bean.mybatis;
+package com.github.tinawhite909.todolistspring.users.mybatis;
 
-import com.github.tinawhite909.todolistspring.users.bean.bean.DBUser;
+import com.github.tinawhite909.todolistspring.users.bean.DBUser;
 import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
 
     @Insert("INSERT INTO public.users(\n" +
-            "\"LOGIN\", \"PASSWORD\"\n" +
-            "\tVALUES (#{login}, #{password};")
+            "\"LOGIN\", \"PASSWORD\")" +
+            " \t VALUES (#{login}, #{password})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "USER_ID")
     Integer addUser(DBUser user);
 

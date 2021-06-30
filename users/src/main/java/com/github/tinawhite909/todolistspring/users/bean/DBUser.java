@@ -1,20 +1,20 @@
-package com.github.tinawhite909.todolistspring.users.bean.bean;
+package com.github.tinawhite909.todolistspring.users.bean;
 
-public class User {
+public class DBUser {
     private Long id;
     private String login;
     private String password;
 
-    public User(Builder builder) {
+    public DBUser(Builder builder) {
         this.id = builder.id;
         this.login = builder.login;
         this.password = builder.password;
     }
 
-    public User() {
+    public DBUser() {
     }
 
-    public User(Long id, String login, String password) {
+    public DBUser(Long id, String login, String password) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -53,8 +53,9 @@ public class User {
             return this;
         }
 
-        public User build() {
-            return new User(this);
+        public DBUser build() {
+            return new DBUser(this);
         }
     }
+
 }
