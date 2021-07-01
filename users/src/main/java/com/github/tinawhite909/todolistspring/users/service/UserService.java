@@ -11,7 +11,6 @@ public class UserService implements IUserService {
     @Autowired
     private UserMapper userMapper;
 
-
     @Override
     public NewUser addUser(NewUser user) {
         DBUser dbUser = new DBUser.Builder()

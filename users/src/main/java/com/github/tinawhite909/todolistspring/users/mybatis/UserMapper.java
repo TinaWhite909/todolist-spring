@@ -10,7 +10,7 @@ public interface UserMapper {
             "\"LOGIN\", \"PASSWORD\")" +
             " \t VALUES (#{login}, #{password})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "USER_ID")
-    Integer addUser(DBUser user);
+    Integer addUser(DBUser dbUser);
 
     @Select("SELECT t.\"USER_ID\", " +
             "       t.\"LOGIN\", " +
