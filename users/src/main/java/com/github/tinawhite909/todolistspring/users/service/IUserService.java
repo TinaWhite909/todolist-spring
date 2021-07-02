@@ -5,5 +5,5 @@ import com.github.tinawhite909.todolistspring.users.bean.NewUser;
 public interface IUserService {
 
     NewUser addUser(NewUser newUser);
-    NewUser getUserById(Long userId);
+    NewUser getUserByName(String username);
 }

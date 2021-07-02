@@ -6,11 +6,19 @@
 </head>
 <body>
 <h1>Edit status</h1>
+<p>
+    <a th:href="@{/newtask}">
+        <input type="button" value="New task"/>
+    </a>
+    <a th:href="@{/tasklist}">
+        <input type="button" value="Tasklist"/>
+    </a>
+</p>
 <p th:text="'id: ' + ${task.id}"/>
 <p th:text="'Start date: ' + ${task.startDate}"/>
 <p th:text="'Finish date: ' + ${task.finishDate}"/>
-<p th:text="'content: ' + ${task.content}"/>
-<p th:text="'status: ' + ${task.status}"/>
+<p th:text="'Content: ' + ${task.content}"/>
+<p th:text="'Status: ' + ${task.status}"/>
 <form action="#" name="status_id" th:action="@{'/editstatus/' + ${task.id}}" th:method="POST">
     <select id="status_id" name="status_id">
     <span th:each="status:${statuses}" th:remove="tag">
@@ -18,10 +26,5 @@
     </span>
     </select>
     <p><input type="submit" value="Submit"/></form>
-
-<a th:href="@{/tasklist}">
-    <p><input type="button" value="Tasklist"/></p>
-</a>
-
 </body>
 </html>

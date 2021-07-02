@@ -6,11 +6,14 @@
 </head>
 <body>
 <h1>Exception</h1>
+<p>
+    <a th:href="@{/newtask}">
+        <input type="button" value="New task"/>
+    </a>
+    <a th:href="@{/tasklist}">
+        <input type="button" value="Tasklist"/>
+    </a>
+</p>
 <p th:text="'id: ' + ${except}"/>
-
-<a href="/newtask">New task</a>
-<a th:href="@{/tasklist}">
-    <p><input type="button" value="Tasklist"/></p>
-</a>
 </body>
 </html>

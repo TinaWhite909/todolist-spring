@@ -7,15 +7,15 @@ import org.apache.ibatis.annotations.*;
 public interface UserMapper {
 
     @Insert("INSERT INTO public.users(\n" +
-            "\"LOGIN\", \"PASSWORD\")" +
-            " \t VALUES (#{login}, #{password})")
+            "\"USERNAME\", \"PASSWORD\")" +
+            " \t VALUES (#{username}, #{password})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "USER_ID")
     Integer addUser(DBUser dbUser);
 
     @Select("SELECT t.\"USER_ID\", " +
-            "       t.\"LOGIN\", " +
+            "       t.\"USERNAME\", " +
             "       t.\"PASSWORD\" " +
             "FROM public.users t " +
-            "WHERE T.USER_ID = #{userId}")
-    DBUser getUserById(Long userId);
+            "WHERE T.USERNAME = #{username}")
+    DBUser getUserByName(String username);
 }

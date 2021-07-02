@@ -6,10 +6,17 @@
 </head>
 <body>
 <h1>Result</h1>
-<p th:text="'id: ' + ${newtask.id}"/>
+<p>
+<a th:href="@{/newtask}">
+    <input type="button" value="New task"/>
+</a>
+<a th:href="@{/tasklist}">
+    <input type="button" value="Tasklist"/>
+</a>
+</p>
+<p th:text="'Id: ' + ${newtask.id}"/>
 <p th:text="'Finish date: ' + ${newtask.finishDate}"/>
-<p th:text="'content: ' + ${newtask.content}"/>
-<p th:text="'status: ' + ${newtask.status}"/>
-<a href="/newtask">Submit another message</a>
+<p th:text="'Content: ' + ${newtask.content}"/>
+<p th:text="'Status: ' + ${newtask.status}"/>
 </body>
 </html>

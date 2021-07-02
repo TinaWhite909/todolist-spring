@@ -15,7 +15,7 @@ public class UserService implements IUserService {
     public NewUser addUser(NewUser user) {
         DBUser dbUser = new DBUser.Builder()
                 .setId(user.getId())
-                .setLogin(user.getLogin())
+                .setLogin(user.getUsername())
                 .setPassword(user.getPassword())
                 .build();
         userMapper.addUser(dbUser);
@@ -24,12 +24,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public NewUser getUserById(Long userId){
-        DBUser dbUser = userMapper.getUserById(userId);
+    public NewUser getUserByName(String username){
+        DBUser dbUser = userMapper.getUserByName(username);
         NewUser user = new NewUser.Builder()
                 .setId(dbUser.getId())
-                .setLogin(dbUser.getLogin())
-                .setPassword(dbUser.getLogin())
+                .setLogin(dbUser.getUsername())
+                .setPassword(dbUser.getUsername())
                 .build();
         return user;
     }
