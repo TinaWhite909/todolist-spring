@@ -1,23 +1,28 @@
 package com.github.tinawhite909.todolistspring.users.bean;
 
+import java.util.List;
+
 public class DBUser {
     private Long id;
     private String username;
     private String password;
+    private List<SysRole> roles;
 
     public DBUser(Builder builder) {
         this.id = builder.id;
         this.username = builder.username;
         this.password = builder.password;
+        this.roles = builder.roles;
     }
 
     public DBUser() {
     }
 
-    public DBUser(Long id, String username, String password) {
+    public DBUser(Long id, String username, String password, List<SysRole> roles) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {
@@ -44,10 +49,19 @@ public class DBUser {
         this.password = password;
     }
 
+    public List<SysRole> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<SysRole> roles) {
+        this.roles = roles;
+    }
+
     public static class Builder {
         Long id;
         String username;
         String password;
+        List<SysRole> roles;
 
 
         public Builder setId(Long iD) {
@@ -62,6 +76,11 @@ public class DBUser {
 
         public Builder setPassword(String pas) {
             password = pas;
+            return this;
+        }
+
+        public Builder setRoles(List<SysRole> roles1) {
+            roles = roles1;
             return this;
         }
 
