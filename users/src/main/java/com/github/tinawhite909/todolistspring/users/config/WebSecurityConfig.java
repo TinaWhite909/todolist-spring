@@ -12,8 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -54,16 +56,56 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable();
     }
 
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("u")
-                        .password("u")
-                        .roles("USER")
-                        .build();
+//    @Bean
+//    @Override
+//    public UserDetailsService userDetailsService() {
+//        UserDetails user =
+//                User.withDefaultPasswordEncoder()
+//                        .username("u")
+//                        .password("u")
+//                        .roles("USER")
+//                        .build();
+//
+//        return new InMemoryUserDetailsManager(user);
+//    }
 
-        return new InMemoryUserDetailsManager(user);
+//    @Bean
+//    public UserDetailsService users(){
+//        UserDetails user = User.builder()
+//                .username("user")
+//                .password("fdf")
+//                .roles("USER")
+//                .build();
+//        UserDetails admin = User.builder()
+//                .username("admin")
+//                .password("fdf")
+//                .roles("ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(user,admin);
+//    }
+
+    @Bean
+    public JdbcUserDetailsManager users(DataSource dataSource){
+        UserDetails user = User.builder()
+                .username("user")
+                .password("fdf")
+                .roles("USER")
+                .build();
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password("fdf")
+                .roles("ADMIN")
+                .build();
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        jdbcUserDetailsManager.createUser(user);
+        jdbcUserDetailsManager.createUser(admin);
+
+        return jdbcUserDetailsManager;
     }
+
+//    @Bean
+//    public JdbcUserDetailsManager users (DataSource dataSource){
+//        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+//        return jdbcUserDetailsManager;
+//    }
 }
