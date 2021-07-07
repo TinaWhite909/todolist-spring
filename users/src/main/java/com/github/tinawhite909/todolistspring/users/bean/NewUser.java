@@ -6,7 +6,7 @@ public class NewUser {
     private Long id;
     private String username;
     private String password;
-    private List<SysRole> roles;
+    private String roles;
 
     public NewUser(Builder builder) {
         this.id = builder.id;
@@ -18,7 +18,7 @@ public class NewUser {
     public NewUser() {
     }
 
-    public NewUser(Long id, String username, String password, List<SysRole> roles) {
+    public NewUser(Long id, String username, String password, String roles) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -49,11 +49,11 @@ public class NewUser {
         this.password = password;
     }
 
-    public List<SysRole> getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(List<SysRole> roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 
@@ -61,7 +61,7 @@ public class NewUser {
         Long id;
         String username;
         String password;
-        List<SysRole> roles;
+        String roles;
 
         public Builder setId(Long iD) {
             id = iD;
@@ -78,7 +78,7 @@ public class NewUser {
             return this;
         }
 
-        public Builder setRoles(List<SysRole> roles1) {
+        public Builder setRoles(String roles1) {
             roles = roles1;
             return this;
         }

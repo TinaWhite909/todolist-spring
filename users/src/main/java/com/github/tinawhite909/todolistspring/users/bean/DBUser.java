@@ -6,7 +6,7 @@ public class DBUser {
     private Long id;
     private String username;
     private String password;
-    private List<SysRole> roles;
+    private String roles;
 
     public DBUser(Builder builder) {
         this.id = builder.id;
@@ -18,7 +18,7 @@ public class DBUser {
     public DBUser() {
     }
 
-    public DBUser(Long id, String username, String password, List<SysRole> roles) {
+    public DBUser(Long id, String username, String password, String roles) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -49,11 +49,11 @@ public class DBUser {
         this.password = password;
     }
 
-    public List<SysRole> getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(List<SysRole> roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 
@@ -61,7 +61,7 @@ public class DBUser {
         Long id;
         String username;
         String password;
-        List<SysRole> roles;
+        String roles;
 
 
         public Builder setId(Long iD) {
@@ -69,7 +69,7 @@ public class DBUser {
             return this;
         }
 
-        public Builder setLogin(String log) {
+        public Builder setUsername(String log) {
             username = log;
             return this;
         }
@@ -79,7 +79,7 @@ public class DBUser {
             return this;
         }
 
-        public Builder setRoles(List<SysRole> roles1) {
+        public Builder setRoles(String roles1) {
             roles = roles1;
             return this;
         }

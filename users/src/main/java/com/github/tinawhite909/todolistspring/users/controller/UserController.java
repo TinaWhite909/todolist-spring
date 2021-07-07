@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -16,22 +15,15 @@ public class UserController {
     @Autowired
     private IUserService userService;
 
-//    @GetMapping("/login")
-//    public String loginUserForm(@PathVariable String username, Model model){
-//        model.addAttribute("newuser",userService.getUserByName(username));
-//        return "newuser";
-//    }
-
     @GetMapping("/newuser")
-    public String newUserForm(Model model){
-        model.addAttribute("newuser",new NewUser());
+    public String newUserForm(Model model) {
+        model.addAttribute("newuser", new NewUser());
         return "newuser";
     }
 
     @PostMapping("/newuser")
-    public String newUserSubmit(@ModelAttribute NewUser user, Model model){
+    public String newUserSubmit(@ModelAttribute NewUser user, Model model) {
         model.addAttribute("newuser", userService.addUser(user));
         return "user";
     }
-
 }
