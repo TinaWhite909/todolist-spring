@@ -32,7 +32,7 @@ public class UserAuthentication implements AuthenticationProvider {
 
         UserDetails principal = User.builder()
                 .username(user.getUsername())
-                .password(user.getUsername())
+                .password(user.getPassword())
                 .roles(user.getRoles())
                 .build();
         return new UsernamePasswordAuthenticationToken(principal, password, principal.getAuthorities());

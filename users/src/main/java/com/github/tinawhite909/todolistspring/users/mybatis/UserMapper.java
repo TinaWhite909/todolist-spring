@@ -14,7 +14,7 @@ public interface UserMapper {
 
 
 
-    @Select("select u.username, u.password, r.name " +
+    @Select("select u.username, u.password, r.role " +
             "from users u " +
             "LEFT JOIN role_users sru on u.user_id= sru.id " +
             "LEFT JOIN roles r on sru.id=r.role_id " +

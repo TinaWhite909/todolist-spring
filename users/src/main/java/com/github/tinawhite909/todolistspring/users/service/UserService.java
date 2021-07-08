@@ -28,7 +28,7 @@ public class UserService implements IUserService, UserDetailsService {
         return user;
     }
 
-//    @Override //&&&
+//    @Override
 //    public NewUser getUserByName(String username){
 //        DBUser dbUser = userMapper.getUserByName(username);
 //        NewUser user = new NewUser.Builder()
@@ -48,9 +48,10 @@ public class UserService implements IUserService, UserDetailsService {
         }
         UserDetails user = User.builder()
                 .username(dbUser.getUsername())
-                .password(dbUser.getUsername())
-                .roles(dbUser.getRoles())
+                .password(dbUser.getPassword())
+                .roles("USER")
                 .build();
+        System.out.println(user.getPassword());
         return user;
     }
 }
