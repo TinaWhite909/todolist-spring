@@ -2,13 +2,19 @@ package com.github.tinawhite909.todolistspring.users.service;
 
 import com.github.tinawhite909.todolistspring.users.bean.DBUser;
 import com.github.tinawhite909.todolistspring.users.bean.NewUser;
+import com.github.tinawhite909.todolistspring.users.bean.SysRole;
 import com.github.tinawhite909.todolistspring.users.mybatis.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService implements IUserService, UserDetailsService {
@@ -21,7 +27,7 @@ public class UserService implements IUserService, UserDetailsService {
                 .setId(user.getId())
                 .setUsername(user.getUsername())
                 .setPassword(user.getPassword())
-                .setRoles("ROLE_USER")
+                .setRoles(user.getRoles())
                 .build();
         userMapper.addUser(dbUser);
 
@@ -41,15 +47,27 @@ public class UserService implements IUserService, UserDetailsService {
 //    }
 
     @Override
+    public String getRoleByUsername(String username) {
+        String role = userMapper.getRoleByUsername(username);
+        return role;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         DBUser dbUser = userMapper.getUserByName(username);
-        if(dbUser==null){
-            throw new UsernameNotFoundException("Unknown user: "+username);
+        if (dbUser == null) {
+            throw new UsernameNotFoundException("Unknown user: " + username);
         }
+        String role = getRoleByUsername(username);
+        List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
+            if (role != null) {
+                GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role);
+                grantedAuthorities.add(grantedAuthority);
+            }
         UserDetails user = User.builder()
                 .username(dbUser.getUsername())
                 .password(dbUser.getPassword())
-                .roles("USER")
+                .authorities(grantedAuthorities)
                 .build();
         System.out.println(user.getPassword());
         return user;

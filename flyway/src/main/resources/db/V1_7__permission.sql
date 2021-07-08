@@ -8,5 +8,5 @@ CREATE TABLE permissions
 );
 
 INSERT INTO permissions ("NAME", "DESCRIPTION", "URL" , "PID")
-VALUES ('ROLE_HOME', 'home', '/', null),
-        ('ROLE_ADMIN', 'user' , '/admin', null);
+VALUES ('ROLE_USER', 'user', '/login', null),
+        ('ROLE_ADMIN', 'admin' , '/*', null);
