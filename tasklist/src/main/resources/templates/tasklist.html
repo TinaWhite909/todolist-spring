@@ -22,6 +22,8 @@
         <th>Finish date</th>
         <th>Task</th>
         <th>Status</th>
+        <th>Assigner</th>
+        <th>Assigned to</th>
     </tr>
     </thead>
     <tbody>
@@ -32,6 +34,8 @@
         <td th:text="${task.finishDate}"></td>
         <td th:text="${task.content}"></td>
         <td th:text="${task.status}"></td>
+        <td th:text="${task.assigner}"></td>
+        <td th:text="${task.assigned_to}"></td>
         <td>
             <a method="post" th:href="@{'/editstatus/' + ${task.id}}">
                 <button type="submit">Edit</button>

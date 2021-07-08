@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Getting Started: Handling Form Submission</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
@@ -9,6 +9,7 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
+
 <form action="#" method="post" th:action="@{/newtask}" th:object="${newtask}">
     <p>
         <a th:href="@{/tasklist}">
@@ -18,6 +19,17 @@
     <p>Data: <input th:field="*{finishDate}" type="date"></p>
     <p>Task: <input th:field="*{content}" type="text"/></p>
     <!--    <p>Data: <input type="date" th:field="${#dates.format(ddate, 'dd-MMM-yyyy')}"/></p>-->
+
+    <form action="#"  th:action="@{'/newtask}" th:method="POST">
+        <select id="id" name="username">
+    <span th:each="newuser:${newusers}" th:remove="tag">
+          <option th:text="${newuser.username}" th:value="${newuser.id}"></option>
+    </span>
+        </select>
+        <p><input type="submit" value="Submit"/>
+    </form>
+
+
     <p><input type="submit" value="Submit"/>
         <input type="reset" value="Reset"/>
     </p>

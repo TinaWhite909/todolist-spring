@@ -8,6 +8,8 @@ public class DBTask {
     private LocalDate finishDate;
     private String content;
     private DBStatus status;
+    private String assigner;
+    private String assigned_to;
 
     public DBTask(Builder builder) {
         this.id = builder.id;
@@ -15,17 +17,21 @@ public class DBTask {
         this.finishDate = builder.finishDate;
         this.content = builder.content;
         this.status = builder.status;
+        this.assigner = builder.assigner;
+        this.assigned_to = builder.assigned_to;
     }
 
     public DBTask() {
     }
 
-    public DBTask(Long id, LocalDate startDate, LocalDate finishDate, String content, DBStatus status) {
+    public DBTask(Long id, LocalDate startDate, LocalDate finishDate, String content, DBStatus status, String assigner, String assigned_to) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.content = content;
         this.status = status;
+        this.assigner = assigner;
+        this.assigned_to = assigned_to;
     }
 
     public Long getId() {
@@ -68,12 +74,30 @@ public class DBTask {
         this.status = status;
     }
 
+    public String getAssigner() {
+        return assigner;
+    }
+
+    public void setAssigner(String assigner) {
+        this.assigner = assigner;
+    }
+
+    public String getAssigned_to() {
+        return assigned_to;
+    }
+
+    public void setAssigned_to(String assigned_to) {
+        this.assigned_to = assigned_to;
+    }
+
     public static class Builder {
         Long id;
         LocalDate startDate;
         LocalDate finishDate;
         String content;
         DBStatus status;
+        String assigner;
+        String assigned_to;
 
         public Builder setId(Long val) {
             id = val;
@@ -99,6 +123,17 @@ public class DBTask {
             status = stat;
             return this;
         }
+
+        public Builder setAssigner(String author1) {
+            assigner = author1;
+            return this;
+        }
+
+        public Builder setAssigned_to(String perf) {
+            assigned_to = perf;
+            return this;
+        }
+
 
         public DBTask build() {
             return new DBTask(this);

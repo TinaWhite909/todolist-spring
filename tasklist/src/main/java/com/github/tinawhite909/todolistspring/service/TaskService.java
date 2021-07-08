@@ -6,7 +6,10 @@ import com.github.tinawhite909.todolistspring.mybatis.StatusMapper;
 import com.github.tinawhite909.todolistspring.bean.DBTask;
 import com.github.tinawhite909.todolistspring.bean.NewTask;
 import com.github.tinawhite909.todolistspring.mybatis.TaskMapper;
+import com.github.tinawhite909.todolistspring.users.security.UserAuthentication;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -33,6 +36,8 @@ public class TaskService implements ITaskService {
                     .setStartDate(dbTask.getStartDate())
                     .setFinishDate(dbTask.getFinishDate())
                     .setContent(dbTask.getContent())
+                    .setAssigner(dbTask.getAssigner())
+                    .setAssigned_to(dbTask.getAssigned_to())
                     .build();
 
             if (dbTask.getStatus() == null) {
@@ -56,13 +61,16 @@ public class TaskService implements ITaskService {
         if (!StringUtils.hasText(newTask.getContent())) {
             throw new TaskServiceRuntimeException("Task content is null!");
         }
-
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
         DBTask task = new DBTask.Builder()
                 .setId(newTask.getId())
                 .setStartDate(LocalDate.now())
                 .setFinishDate(newTask.getFinishDate())
                 .setContent(newTask.getContent())
                 .setStatus(new DBStatus(1L, ""))
+                .setAssigner(username)
+                .setAssigned_to(newTask.getAssigned_to())
                 .build();
 
         taskMapper.addTask(task);
@@ -81,6 +89,8 @@ public class TaskService implements ITaskService {
                 .setStartDate(dbTask.getStartDate())
                 .setFinishDate(dbTask.getFinishDate())
                 .setContent(dbTask.getContent())
+                .setAssigner(dbTask.getAssigner())
+                .setAssigned_to(dbTask.getAssigned_to())
                 .build();
 
         if (dbTask.getStatus() == null) {

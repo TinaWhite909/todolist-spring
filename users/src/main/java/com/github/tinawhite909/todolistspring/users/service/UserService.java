@@ -2,7 +2,6 @@ package com.github.tinawhite909.todolistspring.users.service;
 
 import com.github.tinawhite909.todolistspring.users.bean.DBUser;
 import com.github.tinawhite909.todolistspring.users.bean.NewUser;
-import com.github.tinawhite909.todolistspring.users.bean.SysRole;
 import com.github.tinawhite909.todolistspring.users.mybatis.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -32,6 +31,20 @@ public class UserService implements IUserService, UserDetailsService {
         userMapper.addUser(dbUser);
 
         return user;
+    }
+
+    @Override
+    public List<NewUser> getUsernames() {
+        List<NewUser> newUsers = new ArrayList<>();
+        List<DBUser> dbUsers = userMapper.getUsernames();
+        for (DBUser dbUser : dbUsers) {
+
+            NewUser user = new NewUser.Builder()
+                    .setUsername(dbUser.getUsername())
+                    .build();
+            newUsers.add(user);
+        }
+        return newUsers;
     }
 
 //    @Override

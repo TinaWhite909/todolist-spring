@@ -15,6 +15,7 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "ID")
     Integer addUser(DBUser dbUser);
 
+
     @Select("select u.username, u.password " +
             "from users u " +
             "where username = #{username}")
@@ -26,6 +27,8 @@ public interface UserMapper {
             "where u.username = #{username}")
     String getRoleByUsername(String username);
 
+    @Select("SELECT t.id,  t.username FROM users t ")
+    List<DBUser> getUsernames();
 
     /*
 select u.username, u.password, r.role from users u

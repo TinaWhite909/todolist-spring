@@ -10,5 +10,6 @@ public interface IUserService {
 
     NewUser addUser(NewUser newUser);
     String getRoleByUsername(String username) throws RoleNotFoundException;
+    List<NewUser> getUsernames();
 //    NewUser getUserByName(String username);
 }

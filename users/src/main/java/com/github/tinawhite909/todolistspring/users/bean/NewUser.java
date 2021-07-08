@@ -68,7 +68,7 @@ public class NewUser {
             return this;
         }
 
-        public Builder setLogin(String log) {
+        public Builder setUsername(String log) {
             username = log;
             return this;
         }

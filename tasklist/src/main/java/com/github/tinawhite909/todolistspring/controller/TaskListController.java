@@ -2,6 +2,7 @@ package com.github.tinawhite909.todolistspring.controller;
 
 import com.github.tinawhite909.todolistspring.bean.NewTask;
 import com.github.tinawhite909.todolistspring.service.ITaskService;
+import com.github.tinawhite909.todolistspring.users.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +18,13 @@ public class TaskListController {
     @Autowired
     private ITaskService taskService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/newtask")
     public String newTaskForm(Model model) {
         model.addAttribute("newtask", new NewTask());
+        model.addAttribute("newusers", userService.getUsernames());
         return "newtask";
     }
 

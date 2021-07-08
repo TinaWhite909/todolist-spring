@@ -9,6 +9,8 @@ public class NewTask {
     private String content;
     private String status;
     private Long id_Status;
+    private String assigner;
+    private String assigned_to;
 
     public NewTask(Builder builder) {
         this.id = builder.id;
@@ -17,19 +19,22 @@ public class NewTask {
         this.content = builder.content;
         this.status = builder.status;
         this.id_Status = builder.id_Status;
+        this.assigner = builder.assigner;
+        this.assigned_to = builder.assigned_to;
     }
 
     public NewTask() {
-
     }
 
-    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content, String status, Long id_Status) {
+    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content, String status, Long id_Status, String assigner, String assigned_to) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
         this.content = content;
         this.status = status;
         this.id_Status = id_Status;
+        this.assigner = assigner;
+        this.assigned_to = assigned_to;
     }
 
     public Long getId() {
@@ -80,6 +85,22 @@ public class NewTask {
         this.id_Status = id_Status;
     }
 
+    public String getAssigner() {
+        return assigner;
+    }
+
+    public void setAssigner(String assigner) {
+        this.assigner = assigner;
+    }
+
+    public String getAssigned_to() {
+        return assigned_to;
+    }
+
+    public void setAssigned_to(String assigned_to) {
+        this.assigned_to = assigned_to;
+    }
+
     public static class Builder {
         Long id;
         LocalDate startDate;
@@ -87,6 +108,8 @@ public class NewTask {
         String content;
         String status;
         Long id_Status;
+        String assigner;
+        String assigned_to;
 
         public NewTask.Builder setId(Long val) {
             id = val;
@@ -115,6 +138,16 @@ public class NewTask {
 
         public NewTask.Builder setIdStatus(Long idStatus) {
             id_Status = idStatus;
+            return this;
+        }
+
+        public NewTask.Builder setAssigner(String author1) {
+            assigner = author1;
+            return this;
+        }
+
+        public NewTask.Builder setAssigned_to(String perf) {
+            assigned_to = perf;
             return this;
         }
 
