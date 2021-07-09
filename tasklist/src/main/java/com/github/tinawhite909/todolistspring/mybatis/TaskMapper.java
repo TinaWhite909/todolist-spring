@@ -9,19 +9,22 @@ import java.util.List;
 @Mapper
 public interface TaskMapper {
 
-    @Select("SELECT \n" +
-            "  t.\"TASK_ID\" ID, \n" +
-            "  t.\"START_DATE\" startDate, \n" +
-            "  t.\"FINISH_DATE\" finishDate, \n" +
-            "  t.\"TASK\" \"content\", \n" +
-            "  t.\"STATUS_ID\" \"status_id\"  \n" +
-            "FROM public.tasklist t ")
+    @Select(" SELECT TASK_ID ID,\n" +
+            "START_DATE startDate,\n" +
+            "FINISH_DATE finishDate,\n" +
+            "TASK content,\n" +
+            "STATUS_ID status_id,\n" +
+            "ASSIGNER assigner,\n" +
+            "ASSIGNED_TO assigned_to\n" +
+            "FROM tasklist")
     @Results(value = {
             @Result(property = "id", column = "ID"),
             @Result(property = "startDate", column = "startDate"),
             @Result(property = "finishDate", column = "finishDate"),
             @Result(property = "content", column = "content"),
-            @Result(property = "status", column = "status_id", one = @One(select = "getStatusById"))
+            @Result(property = "status", column = "status_id", one = @One(select = "getStatusById")),
+            @Result(property = "assigner", column = "assigner"),
+            @Result(property = "assigned_to", column = "assigned_to")
     })
     List<DBTask> getTasks();
 
@@ -33,25 +36,28 @@ public interface TaskMapper {
 
 
     @Insert("INSERT INTO public.tasklist(\n" +
-            "\"START_DATE\", \"FINISH_DATE\", \"TASK\", \"STATUS_ID\")\n" +
-            "\tVALUES (#{startDate}, #{finishDate}, #{content}, #{status.id});")
+            "\"START_DATE\", \"FINISH_DATE\", \"TASK\", \"STATUS_ID\", \"ASSIGNER\", \"ASSIGNED_TO\")\n" +
+            "\tVALUES (#{startDate}, #{finishDate}, #{content}, #{status.id}, #{assigner}, #{assigned_to});")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "TASK_ID")
     Integer addTask(DBTask task);
 
-    @Select("SELECT \n" +
-            "  t.\"TASK_ID\" ID, \n" +
-            "  t.\"START_DATE\" startDate, \n" +
-            "  t.\"FINISH_DATE\" finishDate, \n" +
-            "  t.\"TASK\" \"content\", \n" +
-            "  t.\"STATUS_ID\" \"status_id\"  \n" +
-            "FROM public.tasklist t " +
-            "WHERE T.TASK_ID = #{taskId}")
+    @Select(" SELECT TASK_ID ID,\n" +
+            "START_DATE startDate,\n" +
+            "FINISH_DATE finishDate,\n" +
+            "TASK content,\n" +
+            "STATUS_ID status_id,\n" +
+            "ASSIGNER assigner,\n" +
+            "ASSIGNED_TO assigned_to\n" +
+            "FROM tasklist " +
+            "WHERE TASK_ID = #{taskId}")
     @Results(value = {
             @Result(property = "id", column = "ID"),
             @Result(property = "startDate", column = "startDate"),
             @Result(property = "finishDate", column = "finishDate"),
             @Result(property = "content", column = "content"),
-            @Result(property = "status", column = "status_id", one = @One(select = "getStatusById"))
+            @Result(property = "status", column = "status_id", one = @One(select = "getStatusById")),
+            @Result(property = "assigner", column = "assigner"),
+            @Result(property = "assigned_to", column = "assigned_to")
     })
     DBTask getTaskById(Long taskId);
 
@@ -60,6 +66,16 @@ public interface TaskMapper {
             "WHERE t.task_id = #{taskId}")
     void updateStatus(Long taskId, Long statusId);
 
+    /*
+    SELECT TASK_ID ID,
+START_DATE startDate,
+FINISH_DATE finishDate,
+TASK content,
+STATUS_ID status_id,
+ASSIGNER assigner,
+ASSIGNED_TO assigned_to
+FROM tasklist
+     */
 }
 
 

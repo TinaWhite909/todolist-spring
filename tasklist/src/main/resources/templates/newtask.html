@@ -20,18 +20,18 @@
     <p>Task: <input th:field="*{content}" type="text"/></p>
     <!--    <p>Data: <input type="date" th:field="${#dates.format(ddate, 'dd-MMM-yyyy')}"/></p>-->
 
-    <form action="#"  th:action="@{'/newtask}" th:method="POST">
+    <div style="display:inline-block">
+        <p>Assigned to:</p>
+    </div>
+    <form action="#"  th:action="@{'/newtask}" th:method="POST" th:object="${newtask}">
         <select id="id" name="username">
     <span th:each="newuser:${newusers}" th:remove="tag">
           <option th:text="${newuser.username}" th:value="${newuser.id}"></option>
     </span>
         </select>
-        <p><input type="submit" value="Submit"/>
-    </form>
-
-
     <p><input type="submit" value="Submit"/>
         <input type="reset" value="Reset"/>
+    </form>
     </p>
 </form>
 </body>

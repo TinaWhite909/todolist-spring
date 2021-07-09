@@ -22,14 +22,15 @@ public class UserService implements IUserService, UserDetailsService {
 
     @Override
     public NewUser addUser(NewUser user) {
+        String role = "ROLE_USER";
         DBUser dbUser = new DBUser.Builder()
                 .setId(user.getId())
                 .setUsername(user.getUsername())
                 .setPassword(user.getPassword())
-                .setRoles(user.getRoles())
+                .setRoles(role)
                 .build();
         userMapper.addUser(dbUser);
-
+        userMapper.addRole(user.getUsername(), role);
         return user;
     }
 
@@ -83,6 +84,7 @@ public class UserService implements IUserService, UserDetailsService {
                 .authorities(grantedAuthorities)
                 .build();
         System.out.println(user.getPassword());
+        System.out.println(user.getAuthorities());
         return user;
     }
 }
