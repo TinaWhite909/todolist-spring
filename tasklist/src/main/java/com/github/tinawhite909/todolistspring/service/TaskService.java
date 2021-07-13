@@ -1,12 +1,14 @@
 package com.github.tinawhite909.todolistspring.service;
 
 import com.github.tinawhite909.todolistspring.bean.DBStatus;
-import com.github.tinawhite909.todolistspring.exception.TaskServiceRuntimeException;
-import com.github.tinawhite909.todolistspring.mybatis.StatusMapper;
 import com.github.tinawhite909.todolistspring.bean.DBTask;
 import com.github.tinawhite909.todolistspring.bean.NewTask;
+import com.github.tinawhite909.todolistspring.exception.TaskServiceRuntimeException;
+import com.github.tinawhite909.todolistspring.mybatis.StatusMapper;
 import com.github.tinawhite909.todolistspring.mybatis.TaskMapper;
-import com.github.tinawhite909.todolistspring.users.security.UserAuthentication;
+import com.github.tinawhite909.todolistspring.users.bean.DBUser;
+import com.github.tinawhite909.todolistspring.users.bean.NewUser;
+import com.github.tinawhite909.todolistspring.users.mybatis.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +25,9 @@ public class TaskService implements ITaskService {
     private TaskMapper taskMapper;
 
     @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
     private StatusMapper statusMapper;
 
     @Override
@@ -31,13 +36,21 @@ public class TaskService implements ITaskService {
         List<DBTask> dbTasks = taskMapper.getTasks();
         for (DBTask dbTask : dbTasks) {
 
+            NewUser assigner = new NewUser();
+            assigner.setId(dbTask.getAssigner().getId());
+            assigner.setUsername(dbTask.getAssigner().getUsername());
+
+            NewUser assigned_to = new NewUser();
+            assigned_to.setId(dbTask.getAssigned_to().getId());
+            assigned_to.setUsername(dbTask.getAssigned_to().getUsername());
+
             NewTask task = new NewTask.Builder()
                     .setId(dbTask.getId())
                     .setStartDate(dbTask.getStartDate())
                     .setFinishDate(dbTask.getFinishDate())
                     .setContent(dbTask.getContent())
-                    .setAssigner(dbTask.getAssigner())
-                    .setAssigned_to(dbTask.getAssigned_to())
+                    .setAssigner(assigner)
+                    .setAssigned_to(assigned_to)
                     .build();
 
             if (dbTask.getStatus() == null) {
@@ -45,7 +58,6 @@ public class TaskService implements ITaskService {
             } else {
                 task.setStatus(dbTask.getStatus().getStatus());
             }
-
 
             newTasks.add(task);
         }
@@ -69,8 +81,8 @@ public class TaskService implements ITaskService {
                 .setFinishDate(newTask.getFinishDate())
                 .setContent(newTask.getContent())
                 .setStatus(new DBStatus(1L, ""))
-                .setAssigner(username)
-                .setAssigned_to(newTask.getAssigned_to())
+                .setAssigner(userMapper.getUserByName(username))
+                .setAssigned_to(userMapper.getUserById(newTask.getAssigned_to().getId()))
                 .build();
 
         taskMapper.addTask(task);
@@ -84,13 +96,22 @@ public class TaskService implements ITaskService {
     @Override
     public NewTask getTask(Long taskId) {
         DBTask dbTask = taskMapper.getTaskById(taskId);
+
+        NewUser assigner = new NewUser();
+        assigner.setId(dbTask.getAssigner().getId());
+        assigner.setUsername(dbTask.getAssigner().getUsername());
+
+        NewUser assigned_to = new NewUser();
+        assigned_to.setId(dbTask.getAssigned_to().getId());
+        assigned_to.setUsername(dbTask.getAssigned_to().getUsername());
+
         NewTask task = new NewTask.Builder()
                 .setId(dbTask.getId())
                 .setStartDate(dbTask.getStartDate())
                 .setFinishDate(dbTask.getFinishDate())
                 .setContent(dbTask.getContent())
-                .setAssigner(dbTask.getAssigner())
-                .setAssigned_to(dbTask.getAssigned_to())
+                .setAssigner(assigner)
+                .setAssigned_to(assigned_to)
                 .build();
 
         if (dbTask.getStatus() == null) {

@@ -23,10 +23,15 @@ public interface UserMapper {
             ")")
     Integer addRole(String username, String role);
 
-    @Select("select u.username, u.password " +
+    @Select("select u.id, u.username, u.password " +
             "from users u " +
             "where username = #{username}")
     DBUser getUserByName(String username);
+
+    @Select("select u.id, u.username, u.password " +
+            "from users u " +
+            "where id = #{id}")
+    DBUser getUserById(Long id);
 
     @Select("select r.role from users u " +
             "LEFT JOIN role_users sru on u.id= sru.id " +
@@ -35,7 +40,7 @@ public interface UserMapper {
     String getRoleByUsername(String username);
 
     @Select("SELECT t.id,  t.username FROM users t ")
-    List<DBUser> getUsernames();
+    List<DBUser> getUsers();
 
     /*
 select u.username, u.password, r.role from users u

@@ -1,5 +1,7 @@
 package com.github.tinawhite909.todolistspring.bean;
 
+import com.github.tinawhite909.todolistspring.users.bean.NewUser;
+
 import java.time.LocalDate;
 
 public class NewTask {
@@ -9,8 +11,8 @@ public class NewTask {
     private String content;
     private String status;
     private Long id_Status;
-    private String assigner;
-    private String assigned_to;
+    private NewUser assigner;
+    private NewUser assigned_to;
 
     public NewTask(Builder builder) {
         this.id = builder.id;
@@ -26,7 +28,7 @@ public class NewTask {
     public NewTask() {
     }
 
-    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content, String status, Long id_Status, String assigner, String assigned_to) {
+    public NewTask(Long id, LocalDate startDate, LocalDate finishDate, String content, String status, Long id_Status, NewUser assigner, NewUser assigned_to) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
@@ -85,19 +87,19 @@ public class NewTask {
         this.id_Status = id_Status;
     }
 
-    public String getAssigner() {
+    public NewUser getAssigner() {
         return assigner;
     }
 
-    public void setAssigner(String assigner) {
+    public void setAssigner(NewUser assigner) {
         this.assigner = assigner;
     }
 
-    public String getAssigned_to() {
+    public NewUser getAssigned_to() {
         return assigned_to;
     }
 
-    public void setAssigned_to(String assigned_to) {
+    public void setAssigned_to(NewUser assigned_to) {
         this.assigned_to = assigned_to;
     }
 
@@ -108,8 +110,8 @@ public class NewTask {
         String content;
         String status;
         Long id_Status;
-        String assigner;
-        String assigned_to;
+        NewUser assigner;
+        NewUser assigned_to;
 
         public NewTask.Builder setId(Long val) {
             id = val;
@@ -141,12 +143,12 @@ public class NewTask {
             return this;
         }
 
-        public NewTask.Builder setAssigner(String author1) {
-            assigner = author1;
+        public NewTask.Builder setAssigner(NewUser assigner1) {
+            assigner = assigner1;
             return this;
         }
 
-        public NewTask.Builder setAssigned_to(String perf) {
+        public NewTask.Builder setAssigned_to(NewUser perf) {
             assigned_to = perf;
             return this;
         }

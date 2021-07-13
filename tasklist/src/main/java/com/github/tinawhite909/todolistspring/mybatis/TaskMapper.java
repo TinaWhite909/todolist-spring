@@ -2,12 +2,16 @@ package com.github.tinawhite909.todolistspring.mybatis;
 
 import com.github.tinawhite909.todolistspring.bean.DBStatus;
 import com.github.tinawhite909.todolistspring.bean.DBTask;
+import com.github.tinawhite909.todolistspring.users.bean.DBUser;
+import com.github.tinawhite909.todolistspring.users.mybatis.UserMapper;
 import org.apache.ibatis.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper
 public interface TaskMapper {
+
 
     @Select(" SELECT TASK_ID ID,\n" +
             "START_DATE startDate,\n" +
@@ -23,8 +27,8 @@ public interface TaskMapper {
             @Result(property = "finishDate", column = "finishDate"),
             @Result(property = "content", column = "content"),
             @Result(property = "status", column = "status_id", one = @One(select = "getStatusById")),
-            @Result(property = "assigner", column = "assigner"),
-            @Result(property = "assigned_to", column = "assigned_to")
+            @Result(property = "assigner", column = "assigner", one = @One(select = "getUserById")),
+            @Result(property = "assigned_to", column = "assigned_to", one = @One(select = "getUserById"))
     })
     List<DBTask> getTasks();
 
@@ -37,7 +41,7 @@ public interface TaskMapper {
 
     @Insert("INSERT INTO public.tasklist(\n" +
             "\"START_DATE\", \"FINISH_DATE\", \"TASK\", \"STATUS_ID\", \"ASSIGNER\", \"ASSIGNED_TO\")\n" +
-            "\tVALUES (#{startDate}, #{finishDate}, #{content}, #{status.id}, #{assigner}, #{assigned_to});")
+            "\tVALUES (#{startDate}, #{finishDate}, #{content}, #{status.id}, #{assigner.id}, #{assigned_to.id});")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "TASK_ID")
     Integer addTask(DBTask task);
 
@@ -56,8 +60,8 @@ public interface TaskMapper {
             @Result(property = "finishDate", column = "finishDate"),
             @Result(property = "content", column = "content"),
             @Result(property = "status", column = "status_id", one = @One(select = "getStatusById")),
-            @Result(property = "assigner", column = "assigner"),
-            @Result(property = "assigned_to", column = "assigned_to")
+            @Result(property = "assigner", column = "assigner", one = @One(select = "getUserById")),
+            @Result(property = "assigned_to", column = "assigned_to", one = @One(select = "getUserById"))
     })
     DBTask getTaskById(Long taskId);
 
@@ -65,6 +69,7 @@ public interface TaskMapper {
             "SET t.status_id = #{statusId} " +
             "WHERE t.task_id = #{taskId}")
     void updateStatus(Long taskId, Long statusId);
+
 
     /*
     SELECT TASK_ID ID,

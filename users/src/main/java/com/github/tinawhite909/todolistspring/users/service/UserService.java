@@ -35,12 +35,13 @@ public class UserService implements IUserService, UserDetailsService {
     }
 
     @Override
-    public List<NewUser> getUsernames() {
+    public List<NewUser> getUsers() {
         List<NewUser> newUsers = new ArrayList<>();
-        List<DBUser> dbUsers = userMapper.getUsernames();
+        List<DBUser> dbUsers = userMapper.getUsers();
         for (DBUser dbUser : dbUsers) {
 
             NewUser user = new NewUser.Builder()
+                    .setId(dbUser.getId())
                     .setUsername(dbUser.getUsername())
                     .build();
             newUsers.add(user);

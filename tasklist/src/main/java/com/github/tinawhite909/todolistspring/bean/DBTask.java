@@ -1,5 +1,8 @@
 package com.github.tinawhite909.todolistspring.bean;
 
+import com.github.tinawhite909.todolistspring.users.bean.DBUser;
+import com.github.tinawhite909.todolistspring.users.bean.NewUser;
+
 import java.time.LocalDate;
 
 public class DBTask {
@@ -8,8 +11,8 @@ public class DBTask {
     private LocalDate finishDate;
     private String content;
     private DBStatus status;
-    private String assigner;
-    private String assigned_to;
+    private DBUser assigner;
+    private DBUser assigned_to;
 
     public DBTask(Builder builder) {
         this.id = builder.id;
@@ -24,7 +27,7 @@ public class DBTask {
     public DBTask() {
     }
 
-    public DBTask(Long id, LocalDate startDate, LocalDate finishDate, String content, DBStatus status, String assigner, String assigned_to) {
+    public DBTask(Long id, LocalDate startDate, LocalDate finishDate, String content, DBStatus status, DBUser assigner, DBUser assigned_to) {
         this.id = id;
         this.startDate = startDate;
         this.finishDate = finishDate;
@@ -74,19 +77,19 @@ public class DBTask {
         this.status = status;
     }
 
-    public String getAssigner() {
+    public DBUser getAssigner() {
         return assigner;
     }
 
-    public void setAssigner(String assigner) {
+    public void setAssigner(DBUser assigner) {
         this.assigner = assigner;
     }
 
-    public String getAssigned_to() {
+    public DBUser getAssigned_to() {
         return assigned_to;
     }
 
-    public void setAssigned_to(String assigned_to) {
+    public void setAssigned_to(DBUser assigned_to) {
         this.assigned_to = assigned_to;
     }
 
@@ -96,8 +99,8 @@ public class DBTask {
         LocalDate finishDate;
         String content;
         DBStatus status;
-        String assigner;
-        String assigned_to;
+        DBUser assigner;
+        DBUser assigned_to;
 
         public Builder setId(Long val) {
             id = val;
@@ -124,16 +127,15 @@ public class DBTask {
             return this;
         }
 
-        public Builder setAssigner(String author1) {
-            assigner = author1;
+        public Builder setAssigner(DBUser assigner1) {
+            assigner = assigner1;
             return this;
         }
 
-        public Builder setAssigned_to(String perf) {
+        public Builder setAssigned_to(DBUser perf) {
             assigned_to = perf;
             return this;
         }
-
 
         public DBTask build() {
             return new DBTask(this);
