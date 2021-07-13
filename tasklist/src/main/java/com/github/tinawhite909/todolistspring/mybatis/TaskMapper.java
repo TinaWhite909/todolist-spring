@@ -2,15 +2,13 @@ package com.github.tinawhite909.todolistspring.mybatis;
 
 import com.github.tinawhite909.todolistspring.bean.DBStatus;
 import com.github.tinawhite909.todolistspring.bean.DBTask;
-import com.github.tinawhite909.todolistspring.users.bean.DBUser;
 import com.github.tinawhite909.todolistspring.users.mybatis.UserMapper;
 import org.apache.ibatis.annotations.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @Mapper
-public interface TaskMapper {
+public interface TaskMapper extends UserMapper {
 
 
     @Select(" SELECT TASK_ID ID,\n" +
@@ -69,7 +67,6 @@ public interface TaskMapper {
             "SET t.status_id = #{statusId} " +
             "WHERE t.task_id = #{taskId}")
     void updateStatus(Long taskId, Long statusId);
-
 
     /*
     SELECT TASK_ID ID,

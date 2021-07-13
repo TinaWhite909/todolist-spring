@@ -4,7 +4,7 @@ public class Permission {
     private long id;
     private String name;
     private String description;
-    private String url;
+    private  String url;
     private int pid;
     private String method;
 

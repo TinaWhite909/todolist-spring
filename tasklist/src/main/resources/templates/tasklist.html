@@ -34,8 +34,8 @@
         <td th:text="${task.finishDate}"></td>
         <td th:text="${task.content}"></td>
         <td th:text="${task.status}"></td>
-        <td th:text="${task.assigner.id}"></td>
-        <td th:text="${task.assigned_to.id}"></td>
+        <td th:text="${task.assigner.username}"></td>
+        <td th:text="${task.assigned_to.username}"></td>
         <td>
             <a method="post" th:href="@{'/editstatus/' + ${task.id}}">
                 <button type="submit">Edit</button>
