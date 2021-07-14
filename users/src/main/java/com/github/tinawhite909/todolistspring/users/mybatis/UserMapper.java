@@ -17,9 +17,10 @@ public interface UserMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "ID")
     Integer addUser(DBUser dbUser);
 
-    @Insert("INSERT INTO role_users VALUES(\n" +
-            "(SELECT ID from  users where username = #{username}),\n" +
-            "(SELECT ID from  roles where role = #{role})\n" +
+    @Insert("INSERT INTO role_users(user_id, role_id) \n" +
+            "VALUES (\n" +
+            "(SELECT id from  users where username='a'),\n" +
+            "(SELECT id from  roles where role='ROLE_USER')\n" +
             ")")
     Integer addRole(String username, String role);
 
@@ -34,8 +35,8 @@ public interface UserMapper {
     DBUser getUserById(Long id);
 
     @Select("select r.role from users u " +
-            "LEFT JOIN role_users sru on u.id= sru.id " +
-            "LEFT JOIN roles r on sru.role=r.id " +
+            "LEFT JOIN role_users sru on u.id = sru.user_id " +
+            "LEFT JOIN roles r on sru.role_id =r.id " +
             "where u.username = #{username}")
     String getRoleByUsername(String username);
 
@@ -70,9 +71,10 @@ select p.*
  */
 
     /*
-    INSERT INTO role_users VALUES (
-(SELECT ID from  users where username='ee'),
-(SELECT ID from  roles where role='ROLE_USER')
+  INSERT INTO role_users(user_id, role_id)
+VALUES (
+(SELECT id from  users where username='a'),
+(SELECT id from  roles where role='ROLE_USER')
 )
      */
 

@@ -1,7 +1,7 @@
 create table permission_role(
-"ROLES_ID" int,
+"ID" serial primary key,
+"ROLE_ID" int,
 "PERMISSION_ID" int,
-primary key ("ROLES_ID", "PERMISSION_ID"),
-foreign key ("ROLES_ID") references roles (id),
+foreign key ("ROLE_ID") references role (id),
 foreign key ("PERMISSION_ID") references permissions (id)
 );
